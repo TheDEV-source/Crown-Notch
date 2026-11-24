@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Obsidian dark glass notch container ---- */
+.notch-glass {
+  background: rgba(15, 15, 18, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: none;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  will-change: width, height, transform;
+}
+
+/* Text that should fade out at the edges during width morphs */
+.fade-mask {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 10px,
+    #000 calc(100% - 10px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 10px,
+    #000 calc(100% - 10px),
+    transparent 100%
+  );
+}
+
+/* ---- Live audio equalizer bars ---- */
+.eq-bar {
+  animation: eq 1.05s ease-in-out infinite;
+  transform-origin: bottom;
+}
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.28);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ---- Range sliders ---- */
+.notch-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.14);
+  outline: none;
+}
+.notch-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c7c9ff;
+  box-shadow: 0 0 6px rgba(130, 150, 255, 0.55);
+}
+.notch-slider:disabled {
+  opacity: 0.35;
+}
+
+/* ---- Album art glow ---- */
+.glow-art {
+  box-shadow:
+    0 0 18px rgba(130, 150, 255, 0.35),
+    0 0 4px rgba(130, 150, 255, 0.25);
+}
+
+/* Scrollbar-free chip row */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}

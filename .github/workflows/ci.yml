@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  windows-smoke:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        working-directory: bloom-notch-py
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Byte-compile all modules
+        working-directory: bloom-notch-py
+        run: python -m py_compile main.py notch_window.py media.py widgets.py audio.py brightness.py sysinfo.py config.py system_audio.py settings_dialog.py onboarding.py data.py popups.py
+
+      - name: Import check (no GUI)
+        working-directory: bloom-notch-py
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -c "import config, data, sysinfo, brightness, widgets, media, system_audio, popups, onboarding, settings_dialog; print('imports OK')"

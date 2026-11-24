@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+# PyInstaller
+build/
+dist/
+*.spec
+# Runtime diagnostics (regenerate locally)
+notch.log
+notch-*.log
+smoke-fatal.log
+_smoke*.py
+_repro*.py
+_variant*.py
+# Node/Tauri edition
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+*.log
+.DS_Store

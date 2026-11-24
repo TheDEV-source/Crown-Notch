@@ -1,0 +1,8 @@
+PySide6>=6.6
+psutil>=5.9
+pycaw>=20230407
+comtypes>=1.2
+# WinRT bindings for the Windows SMTC media listener.
+# Wheels exist for Python 3.10/3.11; on newer Pythons the app degrades
+# gracefully (media widgets disabled, everything else keeps working).
+winsdk>=1.0.0b10 ; python_version < '3.12'
