@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased (working toward 0.3.0b2)
+
+### Planned
+- CI: also smoke-test Python 3.12 to prove the no-winsdk graceful
+  degradation path stays working.
+- Fixes and polish from beta-1 feedback (fill in as reports come in).
+
 ## 0.3.0b1 — 2026-11-23
 
 **Rename:** the app is now **Crown Notch** (previously Bloom Notch). Settings
