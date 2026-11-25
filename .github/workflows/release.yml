@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: bloom-notch-py
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build single-file exe
+        working-directory: bloom-notch-py
+        run: >
+          pyinstaller --noconsole --onefile --name CrownNotch
+          --icon NONE
+          --add-data "README.md;."
+          main.py
+
+      - name: Smoke-run the exe (it should stay alive briefly)
+        working-directory: bloom-notch-py
+        shell: pwsh
+        run: |
+          $p = Start-Process -FilePath ".\dist\CrownNotch.exe" -PassThru
+          Start-Sleep -Seconds 6
+          if ($p.HasExited) { Write-Error "CrownNotch.exe exited immediately"; }
+          Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
+
+      - name: Attach exe to the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: bloom-notch-py/dist/CrownNotch.exe
