@@ -43,7 +43,16 @@ jobs:
           if ($p.HasExited) { Write-Error "CrownNotch.exe exited immediately"; }
           Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
 
-      - name: Attach exe to the GitHub release
+      - name: Build Windows installer (NSIS, preinstalled on runners)
+        working-directory: bloom-notch-py
+        shell: pwsh
+        run: |
+          & "C:\Program Files (x86)\NSIS\makensis.exe" installer.nsi
+          if ($LASTEXITCODE -ne 0) { Write-Error "makensis failed" }
+
+      - name: Attach installer + portable exe to the GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: bloom-notch-py/dist/CrownNotch.exe
+          files: |
+            bloom-notch-py/dist/CrownNotch-Setup.exe
+            bloom-notch-py/dist/CrownNotch.exe

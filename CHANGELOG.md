@@ -5,6 +5,10 @@
 ### Planned
 - CI: also smoke-test Python 3.12 to prove the no-winsdk graceful
   degradation path stays working.
+- **Installable app**: `CrownNotch-Setup.exe` (NSIS per-user installer with
+  Start Menu shortcut, Add/Remove-Programs uninstaller, launches after
+  install) built automatically for every release tag alongside the portable
+  single-file exe.
 - Fixes and polish from beta-1 feedback (fill in as reports come in).
 
 ## 0.3.0b1 — 2026-11-23

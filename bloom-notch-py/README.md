@@ -110,6 +110,23 @@ pip install pyinstaller
 pyinstaller --noconsole --onefile --name CrownNotch main.py
 ```
 
+### Or install it like a real app (recommended)
+
+The GitHub **Releases** page has **`CrownNotch-Setup.exe`** — download it,
+double-click, and Crown Notch installs to `%LOCALAPPDATA%\CrownNotch` with a
+Start Menu shortcut and an uninstaller in *Settings → Apps* (per-user, no
+admin needed), then launches right away. A portable single-file
+`CrownNotch.exe` is also attached for USB-stick use. Every version tag
+(`v*`) triggers an automated build of both, so the newest release always has
+fresh binaries.
+
+To build the installer locally:
+
+```powershell
+pyinstaller --noconsole --onefile --name CrownNotch main.py
+& "C:\Program Files (x86)\NSIS\makensis.exe" installer.nsi   # needs NSIS
+```
+
 ## Usage
 
 | Action | Result |
